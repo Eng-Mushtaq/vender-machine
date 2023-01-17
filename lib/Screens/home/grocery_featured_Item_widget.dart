@@ -11,13 +11,13 @@ class GroceryFeaturedItem {
 }
 
 var groceryFeaturedItems = [
-  GroceryFeaturedItem("شوكولاته", "assets/images/pulses.png"),
-  GroceryFeaturedItem("مشروبات", "assets/images/rise.png"),
+  GroceryFeaturedItem("شوكولاته", "assets/images/chocolates.png"),
+  GroceryFeaturedItem("مشروبات", "assets/images/drinks.png"),
 ];
 
 class GroceryFeaturedCard extends StatelessWidget {
   const GroceryFeaturedCard(this.groceryFeaturedItem,
-      {this.color = kPrimaryColor});
+      {super.key, this.color = kPrimaryColor});
 
   final GroceryFeaturedItem groceryFeaturedItem;
   final Color color;

@@ -16,7 +16,6 @@ class ButtomNavBar extends StatelessWidget {
     tabBarController.qrCode = qrCode;
     return PersistentTabView(
       context,
-
       onItemSelected: ((index) => tabBarController.changeBottomNavBar(index)),
       padding: const NavBarPadding.all(5),
       controller: tabBarController.controller,

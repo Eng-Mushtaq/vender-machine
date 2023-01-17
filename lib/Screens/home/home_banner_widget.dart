@@ -22,7 +22,7 @@ class HomeBanner extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Image.asset(
-              "assets/images/banner_image.png",
+              "assets/images/banar.png",
             ),
           ),
           const Spacer(),

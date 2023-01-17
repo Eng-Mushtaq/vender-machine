@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../common_widgets/app_button.dart';
 import '../../common_widgets/app_text.dart';
+import '../../components/rounded_input.dart';
 import '../product_details/order_failed_dialog.dart';
 
 class CheckoutBottomSheet extends StatefulWidget {
@@ -45,12 +47,50 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
           const SizedBox(
             height: 45,
           ),
-          getDivider(),
-          checkoutRow("Delivery", trailingText: "Select Method"),
-          getDivider(),
-          checkoutRow("Payment", trailingWidget: const Icon(Icons.payment)),
-          getDivider(),
-          checkoutRow("Promo Code", trailingText: "Pick Discount"),
+          Form(
+              child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              cardInput(
+                  keyType: TextInputType.number,
+                  hintText: 'رقم البطاقة',
+                  icon: Icons.payment),
+              const SizedBox(
+                height: 20,
+              ),
+              cardInput(
+                  keyType: TextInputType.number,
+                  hintText: 'الاسم الرباعي',
+                  icon: Icons.person),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 2.4,
+                      child: cardInput(
+                          keyType: TextInputType.number,
+                          hintText: 'MM/YY',
+                          icon: Icons.calendar_today),
+                    ),
+                    const SizedBox(width: 14),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 2.4,
+                      child: cardInput(
+                        keyType: TextInputType.number,
+                        hintText: 'CVV',
+                        icon: Icons.lock_outline,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          )),
           getDivider(),
           checkoutRow("اجمالي الفاتورة ", trailingText: "\$13.97"),
           getDivider(),
@@ -88,7 +128,7 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
   Widget termsAndConditionsAgreement(BuildContext context) {
     return RichText(
       text: TextSpan(
-          text: 'By placing an order you agree to our',
+          text: 'من خلال المتابعة فأنت توافق على سياسة',
           style: TextStyle(
             color: const Color(0xFF7C7C7C),
             fontSize: 14,
@@ -97,12 +137,12 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
           ),
           children: const [
             TextSpan(
-                text: " Terms",
+                text: " شروط",
                 style: TextStyle(
                     color: Colors.black, fontWeight: FontWeight.bold)),
-            TextSpan(text: " And"),
+            TextSpan(text: " و"),
             TextSpan(
-                text: " Conditions",
+                text: " الأحكام",
                 style: TextStyle(
                     color: Colors.black, fontWeight: FontWeight.bold)),
           ]),
@@ -132,13 +172,13 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
                 ),
-          const SizedBox(
-            width: 20,
-          ),
-          const Icon(
-            Icons.arrow_forward_ios,
-            size: 20,
-          )
+          // const SizedBox(
+          //   width: 20,
+          // ),
+          // const Icon(
+          //   Icons.arrow_forward_ios,
+          //   size: 20,
+          // )
         ],
       ),
     );
@@ -151,5 +191,54 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
         builder: (BuildContext context) {
           return const OrderFailedDialogue();
         });
+  }
+
+  Widget cardInput(
+      {TextInputType? keyType,
+      String? hintText,
+      IconData? icon,
+      var controller}) {
+    return Container(
+      height: 55,
+      width: MediaQuery.of(context).size.width / 1.12,
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: TextFormField(
+        controller: controller,
+        keyboardType: TextInputType.number,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          hintText: hintText,
+          hintStyle: const TextStyle(
+            color: Colors.grey,
+            fontSize: 16,
+          ),
+          prefixIcon: Icon(
+            icon,
+            color: Colors.grey,
+          ),
+        ),
+        // inputFormatters: [
+        //   FilteringTextInputFormatter.digitsOnly,
+        //   LengthLimitingTextInputFormatter(16),
+        //   CardInputFormatter(),
+        // ],
+        onChanged: (value) {
+          var text = value.replaceAll(RegExp(r'\s+\b|\b\s'), ' ');
+          setState(() {
+            // cardNumberController.value = cardNumberController.value
+            //     .copyWith(
+            //         text: text,
+            //         selection:
+            //             TextSelection.collapsed(offset: text.length),
+            //         composing: TextRange.empty);
+          });
+        },
+      ),
+    );
   }
 }

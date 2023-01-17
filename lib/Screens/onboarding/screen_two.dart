@@ -29,10 +29,10 @@ class OnboardingScreenTwo extends StatelessWidget {
               ),
               Image.asset(
                 'assets/images/register.png',
-                height: 350,
+                height: size.height * 0.4,
               ),
-              const SizedBox(
-                height: 150,
+              SizedBox(
+                height: size.height * 0.2,
               )
             ],
           ),

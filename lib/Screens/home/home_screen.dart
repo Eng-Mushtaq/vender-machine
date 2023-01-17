@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:images_picker/images_picker.dart';
 import 'package:vender_machine/Model/machineModel.dart';
 import 'package:vender_machine/Model/machineProduct.dart';
 import 'package:vender_machine/constants.dart';
@@ -18,101 +19,90 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MachineModel? machine;
-    if (barcodeMachine != null) {
-      machine = machines.firstWhere((element) {
-        return element.name == barcodeMachine;
-      });
-    }
-
+    // MachineModel? machine;
+    // if (barcodeMachine != null) {
+    //   machine = machines.firstWhere((element) {
+    //     return element.name == barcodeMachine;
+    //   });
+    // }
+    Size size = MediaQuery.of(context).size;
+    var height = SizedBox(
+      height: size.height * 0.015,
+    );
     return Scaffold(
-        body: barcodeMachine != null
-            ? SafeArea(
-                child: Container(
-                  child: SingleChildScrollView(
-                    child: Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          // Image.asset("assets/images/login.png"),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          padded(locationWidget()),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          padded(const SearchBarWidget()),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          padded(HomeBanner()),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          padded(
-                            const Text(
-                              "الأصناف",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: kPrimaryColor),
-                            ),
-                          ),
-                          // getHorizontalItemSlider(machines[0].productsList!,),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Container(
-                            height: 105,
-                            child: ListView(
-                              padding: EdgeInsets.zero,
-                              scrollDirection: Axis.horizontal,
-                              children: [
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                GroceryFeaturedCard(
-                                  groceryFeaturedItems[0],
-                                  color: const Color(0xffF8A44C),
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                GroceryFeaturedCard(
-                                  groceryFeaturedItems[1],
-                                  color: kPrimaryColor,
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          getHorizontalItemSlider(machine!.productsList!),
+        body:
+            // barcodeMachine != null ?
+            SafeArea(
+      child: Container(
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                height,
+                // const SizedBox(
+                //   height: 15,
+                // ),
+                // Image.asset("assets/images/login.png"),
 
-                          // const SizedBox(
-                          //   height: 15,
-                          // ),
-                          // getHorizontalItemSlider(
-                          //   machines[1].productsList!,
-                          // ),
-                        ],
-                      ),
-                    ),
+                padded(locationWidget()),
+                height,
+
+                padded(const SearchBarWidget()),
+                height,
+
+                padded(HomeBanner()), height,
+
+                padded(
+                  const Text(
+                    "الأصناف",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: kPrimaryColor),
                   ),
                 ),
-              )
-            : const Center(
-                child: Text(
-                    'لا يوجد منتجات لعرضها .. امسح باركود الماكينة لعرض المنتجان'),
-              ));
+
+                height,
+                Container(
+                  height: 105,
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      GroceryFeaturedCard(
+                        groceryFeaturedItems[0],
+                        color: const Color(0xffF8A44C),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      GroceryFeaturedCard(
+                        groceryFeaturedItems[1],
+                        color: kPrimaryColor,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                getHorizontalItemSlider(machines[0].productsList!),
+                // getHorizontalItemSlider(machine!.productsList!),
+              ],
+            ),
+          ),
+        ),
+      ),
+    )
+        // : const Center(
+        //     child: Text(
+        //         'لا يوجد منتجات لعرضها .. امسح باركود الماكينة لعرض المنتجان'),
+        //   ),
+        );
   }
 
   Widget padded(Widget widget) {

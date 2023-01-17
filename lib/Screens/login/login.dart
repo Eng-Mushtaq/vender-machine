@@ -19,12 +19,12 @@ class _LoginScreenState extends State<LoginScreen>
   bool? isLogin = true;
   Animation<double>? containerSize;
   AnimationController? animationController;
-  Duration animationDuration = Duration(milliseconds: 270);
+  Duration animationDuration = const Duration(milliseconds: 270);
 
   @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
     animationController =
         AnimationController(vsync: this, duration: animationDuration);

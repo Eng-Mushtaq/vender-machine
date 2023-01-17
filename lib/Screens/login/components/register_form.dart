@@ -7,7 +7,7 @@ import '../../../components/rounded_password_input.dart';
 import '../../bottomNavBar.dart';
 
 class RegisterForm extends StatelessWidget {
-   const RegisterForm({
+  const RegisterForm({
     Key? key,
     @required this.isLogin,
     @required this.animationDuration,
@@ -37,29 +37,29 @@ class RegisterForm extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                   const SizedBox(height: 10),
-                   const Text(
+                  const SizedBox(height: 10),
+                  const Text(
                     'مرحبا بك',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
-                   const SizedBox(height: 40),
+                  SizedBox(height: size!.height * 0.05),
                   Image.asset(
                     'assets/images/register.png',
-                    height: 270,
-                    width: 270,
+                    height: size!.height * 0.3,
                   ),
-                   const SizedBox(height: 40),
+                  SizedBox(height: size!.height * 0.03),
                   const RoundedInput(icon: Icons.mail, hint: 'الاسم'),
-                   const RoundedInput(icon: Icons.face_rounded, hint: ' اسم المستخدم'),
-                   const RoundedPasswordInput(hint: 'كلمة المرور'),
-                   const SizedBox(height: 10),
+                  const RoundedInput(
+                      icon: Icons.face_rounded, hint: ' اسم المستخدم'),
+                  const RoundedPasswordInput(hint: 'كلمة المرور'),
+                  const SizedBox(height: 10),
                   RoundedButton(
                     title: 'انشاء الحساب',
                     onPress: () {
-                      Get.to( ButtomNavBar());
+                      Get.to(ButtomNavBar());
                     },
                   ),
-                   const SizedBox(height: 10),
+                  const SizedBox(height: 10),
                 ],
               ),
             ),

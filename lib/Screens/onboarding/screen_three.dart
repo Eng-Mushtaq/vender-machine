@@ -87,7 +87,7 @@ class OnboardingScreenThree extends StatelessWidget {
                   decoration: BoxDecoration(
                       border: Border.all(color: black, width: 2),
                       shape: BoxShape.circle,
-                      color: white),
+                      color: white,),
                 ),
                 Container(
                   margin:
@@ -137,7 +137,7 @@ class OnboardingScreenThree extends StatelessWidget {
                   padding: const EdgeInsets.only(right: appPadding),
                   child: FloatingActionButton(
                     onPressed: () {
-                      Get.to(LoginScreen());
+                      Get.to(const LoginScreen());
                     },
                     backgroundColor: white,
                     child: const Icon(
