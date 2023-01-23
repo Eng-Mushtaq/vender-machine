@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:vender_machine/Screens/cart/cart_screen.dart';
+import 'package:vender_machine/Screens/home/mobileScreen.dart';
 
 import '../Screens/home/home_screen.dart';
 import '../Screens/machinesScreen.dart';
@@ -10,10 +11,11 @@ import '../Screens/profileScreen.dart';
 import '../Screens/qrScanner.dart';
 import '../constants.dart';
 
-class BottomBarController extends GetxController {
+class BottomBarController with ChangeNotifier {
   BuildContext? context;
   String? qrCode;
   PersistentTabController controller = PersistentTabController(initialIndex: 0);
+  // BottomBarController(this.context);
   List<Widget> buildScreens() {
     return [
       HomeScreen(barcodeMachine: qrCode),
@@ -49,7 +51,15 @@ class BottomBarController extends GetxController {
           title: (" "),
           activeColorPrimary: kPrimaryColor,
           inactiveColorPrimary: CupertinoColors.systemGrey,
-          onPressed: ((_) => Get.to(const QRScreen()))),
+          // onPressed: ((_) {
+          // //   Navigator.push(
+          // //     context!,
+          // //     MaterialPageRoute<void>(
+          // //       builder: (BuildContext context) => const QRScreen(),
+          // //     ),
+          // //   );
+          // // })),
+      onPressed: ((_) => Get.to(const MobileScanner()))),
       PersistentBottomNavBarItem(
         textStyle: textStyle,
         icon: const Icon(Icons.local_grocery_store_outlined),
@@ -68,11 +78,12 @@ class BottomBarController extends GetxController {
   }
 
 /////////////////////////////////////////////////////////////////
-  var currentIndex = 0.obs;
+  var currentIndex = 0;
 
   void changeBottomNavBar(index) {
-    currentIndex.value = index;
+    currentIndex = index;
+    notifyListeners();
   }
 
-  showBottomSheetFunction(BuildContext context) {}
+  // showBottomSheetFunction(BuildContext context) {}
 }

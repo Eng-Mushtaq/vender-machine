@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
+import '../../components/rounded_button.dart';
+import '../../components/rounded_input.dart';
+import '../../components/rounded_password_input.dart';
 import '../../constants.dart';
+import '../../providers/auth.dart';
 import 'components/cancel_button.dart';
 import 'components/login_form.dart';
 import 'components/register_form.dart';
 
-
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -16,6 +20,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin {
+  GlobalKey<FormState> fKey = GlobalKey<FormState>();
+  GlobalKey<FormState> regFkey = GlobalKey<FormState>();
+
   bool? isLogin = true;
   Animation<double>? containerSize;
   AnimationController? animationController;
@@ -39,6 +46,7 @@ class _LoginScreenState extends State<LoginScreen>
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final auth = Provider.of<Auth>(context);
 
     double viewInset = MediaQuery.of(context)
         .viewInsets
@@ -46,10 +54,10 @@ class _LoginScreenState extends State<LoginScreen>
     double defaultLoginSize = size.height - (size.height * 0.2);
     double defaultRegisterSize = size.height - (size.height * 0.1);
 
-    containerSize = Tween<double>(
-            begin: size.height * 0.1, end: defaultRegisterSize)
-        .animate(
-            CurvedAnimation(parent: animationController!, curve: Curves.linear));
+    containerSize =
+        Tween<double>(begin: size.height * 0.1, end: defaultRegisterSize)
+            .animate(CurvedAnimation(
+                parent: animationController!, curve: Curves.linear));
 
     return Scaffold(
       body: Stack(
@@ -84,18 +92,23 @@ class _LoginScreenState extends State<LoginScreen>
             size: size,
             animationController: animationController!,
             tapEvent: isLogin!
-                ? (){}
+                ? () {}
                 : () {
                     // returning null to disable the button
                     animationController!.reverse();
-                    setState(() {
-                      isLogin = !isLogin!;
-                    },);
+                    setState(
+                      () {
+                        isLogin = !isLogin!;
+                      },
+                    );
                   },
           ),
 
           // Login Form
+
+         
           LoginForm(
+            fKey:fKey,
               isLogin: isLogin!,
               animationDuration: animationDuration,
               size: size,
@@ -118,6 +131,7 @@ class _LoginScreenState extends State<LoginScreen>
 
           // Register Form
           RegisterForm(
+            formKey: regFkey,
               isLogin: isLogin!,
               animationDuration: animationDuration,
               size: size,
@@ -133,8 +147,8 @@ class _LoginScreenState extends State<LoginScreen>
       child: Container(
         width: double.infinity,
         height: containerSize!.value,
-        decoration: BoxDecoration(
-          borderRadius:const BorderRadius.only(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
             topLeft: Radius.circular(100),
             topRight: Radius.circular(100),
           ),
@@ -147,14 +161,16 @@ class _LoginScreenState extends State<LoginScreen>
               : () {
                   animationController!.forward();
 
-                  setState(() {
-                    isLogin = !isLogin!;
-                  },);
+                  setState(
+                    () {
+                      isLogin = !isLogin!;
+                    },
+                  );
                 },
           child: isLogin!
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children:const [
+                  children: const [
                     Text(
                       "ليس لديك حساب ؟",
                       style: TextStyle(color: kPrimaryColor, fontSize: 18),

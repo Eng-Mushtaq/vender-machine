@@ -4,8 +4,29 @@ class MachineModel {
   String? id;
   String? name;
   String? status;
+  String? qrCode;
   List<MachineProduct>? productsList;
-  MachineModel({this.id, this.name, this.status, this.productsList});
+  MachineModel({
+    this.id,
+    this.name,
+    this.status,
+    this.productsList,
+    this.qrCode,
+  });
+  factory MachineModel.fromJson(Map<String, dynamic> json) => MachineModel(
+    id: json["id"],
+    name: json["name"],
+    status: json["status"],
+    qrCode: json["qrCode"],
+    productsList: List<MachineProduct>.from(json["productsList"].map((x) => MachineProduct.fromJson(x))),
+);
+
+ Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+    "qrCode": qrCode,
+    "questions": List<dynamic>.from(productsList!.map((x) => x.toMap())),
+};
 }
 
 List<MachineModel> machines = [

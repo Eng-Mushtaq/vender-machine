@@ -122,7 +122,7 @@ class OnboardingScreenThree extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      Get.to(const LoginScreen());
+                      Get.to( LoginScreen());
                     },
                     child: const Text(
                       'تخطي',
@@ -137,7 +137,7 @@ class OnboardingScreenThree extends StatelessWidget {
                   padding: const EdgeInsets.only(right: appPadding),
                   child: FloatingActionButton(
                     onPressed: () {
-                      Get.to(const LoginScreen());
+                      Get.to( LoginScreen());
                     },
                     backgroundColor: white,
                     child: const Icon(

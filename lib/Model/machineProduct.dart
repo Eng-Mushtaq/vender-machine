@@ -12,6 +12,23 @@ class MachineProduct {
     this.price,
     this.imagePath,
   });
+   factory MachineProduct.fromJson(Map<String, dynamic> json) => MachineProduct(
+    id: json["id"],
+    name: json["name"],
+    description: json["description"],
+    price: json["price"],
+    imagePath: json["imagePath"],
+);
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'description': description,
+      'name': name,
+      'price': price,
+      'imagePath': imagePath,
+    };
+  }
 }
 
 List<MachineProduct> products = [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:provider/provider.dart';
 
 import '../../Controller/navBarController.dart';
 
@@ -12,7 +13,7 @@ class ButtomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BottomBarController tabBarController = Get.find();
+    final  tabBarController = Provider.of<BottomBarController>(context);
     tabBarController.qrCode = qrCode;
     return PersistentTabView(
       context,

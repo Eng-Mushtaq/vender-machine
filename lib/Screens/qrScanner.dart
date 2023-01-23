@@ -8,6 +8,7 @@ import 'package:scan/scan.dart';
 
 import '../Controller/navBarController.dart';
 import 'bottomNavBar.dart';
+
 class QRScreen extends StatefulWidget {
   const QRScreen({Key? key}) : super(key: key);
 
@@ -23,14 +24,14 @@ class _QRScreenState extends State<QRScreen> {
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
-  // @override
-  // void reassemble() {
-  //   super.reassemble();
-  //   if (Platform.isAndroid) {
-  //     controller!.pauseCamera();
-  //   }
-  //   controller!.resumeCamera();
-  // }
+  @override
+  void reassemble() {
+    super.reassemble();
+    if (Platform.isAndroid) {
+      controller!.pauseCamera();
+    }
+    controller!.resumeCamera();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,14 @@ class _QRScreenState extends State<QRScreen> {
                         if (str != null) {
                           setState(() {
                             qrcode = str;
-                              Get.off( ButtomNavBar(qrCode: 'machine 2',) );
+                            // Get.off( ButtomNavBar(qrCode: 'machine 2',) );
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute<void>(
+                                builder: (BuildContext context) =>
+                                     ButtomNavBar(qrCode: 'machine 2',),
+                              ),
+                            );
                           });
                         }
                       }
@@ -149,7 +157,6 @@ class _QRScreenState extends State<QRScreen> {
   }
 
   Widget _buildQrView(BuildContext context) {
-
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
             MediaQuery.of(context).size.height < 400)
@@ -170,15 +177,19 @@ class _QRScreenState extends State<QRScreen> {
     );
   }
 
-  void _onQRViewCreated(QRViewController controller,) {
+  void _onQRViewCreated(
+    QRViewController controller,
+  ) {
     setState(() {
       this.controller = controller;
     });
     controller.scannedDataStream.listen((scanData) {
       setState(() {
-       qrcode = scanData.code;
+        qrcode = scanData.code;
         // Get.to( const ButtomNavBar());
-        Get.off( ButtomNavBar(qrCode: 'machine 2',) );
+        Get.off(ButtomNavBar(
+          qrCode: 'machine 2',
+        ));
       });
     });
   }

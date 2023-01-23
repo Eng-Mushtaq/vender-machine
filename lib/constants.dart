@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const kPrimaryColor = Color.fromARGB(255, 245, 57, 57);
-var kBackgroundColor =Colors.grey[200];
-// const kPrimaryColor = Color(0XFF6A62B7);
-// const kBackgroundColor = Color(0XFFE5E5E5);
+// const kPrimaryColor = Color.fromARGB(255, 245, 57, 57);
+// var kBackgroundColor =Colors.grey[200];
+const kPrimaryColor = Color(0XFF6A62B7);
+const kBackgroundColor = Color(0XFFE5E5E5);
 const Color white = Colors.white;
 const Color black = Colors.black;
 // const Color yellow = Color(0xFFFFD54F);
