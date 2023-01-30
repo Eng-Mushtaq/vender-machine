@@ -9,6 +9,7 @@ import 'package:vender_machine/providers/auth.dart';
 import 'Controller/binding.dart';
 import 'Controller/navBarController.dart';
 import 'Screens/bottomNavBar.dart';
+import 'Screens/splashScreen.dart';
 import 'constants.dart';
 import 'firebase_options.dart';
 import 'providers/products.dart';
@@ -28,11 +29,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => BottomBarController()),
-        ChangeNotifierProvider(create: (_) => Products()),
         ChangeNotifierProvider(create: (_) => Auth()),
+        ChangeNotifierProvider(
+          create: (_) => Products()..fetchAndSetProducts(),
+        ),
+        ChangeNotifierProvider(create: (_) => BottomBarController()),
       ],
       child: GetMaterialApp(
+        
         locale: const Locale('ar'),
         // initialBinding:Binding(),
         title: 'Vender Machine',
@@ -41,7 +45,7 @@ class MyApp extends StatelessWidget {
           primaryColor: kPrimaryColor,
           textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
         ),
-        home: const OnboardingScreenOne(),
+        home: const SplashScreen(),
       ),
     );
   }

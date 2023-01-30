@@ -6,15 +6,15 @@ import 'package:provider/provider.dart';
 import '../../Controller/navBarController.dart';
 
 class ButtomNavBar extends StatelessWidget {
-  ButtomNavBar({super.key, this.qrCode});
-  String? qrCode;
+  // ButtomNavBar({super.key, this.qrCode});
+  // String? qrCode;
 
   // const ButtomNavBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final  tabBarController = Provider.of<BottomBarController>(context);
-    tabBarController.qrCode = qrCode;
+    // tabBarController.qrCode = qrCode;
     return PersistentTabView(
       context,
       onItemSelected: ((index) => tabBarController.changeBottomNavBar(index)),

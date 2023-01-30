@@ -42,7 +42,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                       subtitle: AppText(
-                        text: widget.groceryItem!.description,
+                        text: widget.groceryItem !.description,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: const Color(0xff7C7C7C),
@@ -120,7 +120,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         tag:
             "GroceryItem:${widget.groceryItem!.name}-${widget.heroSuffix ?? ""}",
         child: Image(
-          image: AssetImage(widget.groceryItem!.imagePath!),
+          image: NetworkImage(widget.groceryItem!.imagePath!),
         ),
       ),
     );
@@ -187,7 +187,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  double getTotalPrice() {
+  int getTotalPrice() {
     return amount! * widget.groceryItem!.price!;
   }
 }

@@ -39,8 +39,8 @@ class GroceryItemCardWidget extends StatelessWidget {
             Expanded(
               child: Center(
                 child: Hero(
-                  tag: "GroceryItem:${item!.name!}-${heroSuffix ?? ""}",
-                  child: imageWidget(),
+                  tag: "GroceryItem:${item!.imagePath!}-${heroSuffix ?? ""}",
+                  child: imageWidget(item!.imagePath),
                 ),
               ),
             ),
@@ -78,9 +78,12 @@ class GroceryItemCardWidget extends StatelessWidget {
     );
   }
 
-  Widget imageWidget() {
+  Widget imageWidget(String? imageUrl) {
     return Container(
-      child: Image.asset(item!.imagePath!),
+      child: imageUrl == null
+          ? 
+          const CircularProgressIndicator()
+          : Image.network(imageUrl),
     );
   }
 

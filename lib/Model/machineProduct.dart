@@ -1,9 +1,9 @@
 class MachineProduct {
-  final int? id;
-  final String? description;
-  final String? name;
-  final double? price;
-  final String? imagePath;
+ int? id;
+ String? description;
+ String? name;
+ int? price;
+ String? imagePath;
 
   MachineProduct({
     this.id,
@@ -12,13 +12,18 @@ class MachineProduct {
     this.price,
     this.imagePath,
   });
-   factory MachineProduct.fromJson(Map<String, dynamic> json) => MachineProduct(
-    id: json["id"],
-    name: json["name"],
-    description: json["description"],
-    price: json["price"],
-    imagePath: json["imagePath"],
-);
+  MachineProduct.fromJson(Map<String, dynamic> json) {
+    id=
+    json["id"];
+    name=
+    json["name"];
+    description=
+    json["description"];
+    price=
+    json["price"];
+    imagePath=
+    json["image"];
+  }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -26,7 +31,7 @@ class MachineProduct {
       'description': description,
       'name': name,
       'price': price,
-      'imagePath': imagePath,
+      'image': imagePath,
     };
   }
 }

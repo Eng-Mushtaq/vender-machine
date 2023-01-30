@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:vender_machine/Screens/cart/cart_screen.dart';
-import 'package:vender_machine/Screens/home/mobileScreen.dart';
 
 import '../Screens/home/home_screen.dart';
 import '../Screens/machinesScreen.dart';
 import '../Screens/profileScreen.dart';
+
 import '../Screens/qrScanner.dart';
 import '../constants.dart';
 
@@ -18,9 +18,9 @@ class BottomBarController with ChangeNotifier {
   // BottomBarController(this.context);
   List<Widget> buildScreens() {
     return [
-      HomeScreen(barcodeMachine: qrCode),
+      HomeScreen(),
       const MachinesScreen(),
-      const QRScreen(),
+       QRScrean(),
       const CartScreen(),
       const ProfileScrean(),
     ];
@@ -51,7 +51,7 @@ class BottomBarController with ChangeNotifier {
           title: (" "),
           activeColorPrimary: kPrimaryColor,
           inactiveColorPrimary: CupertinoColors.systemGrey,
-          // onPressed: ((_) {
+          onPressed: ((_) =>Get.to(QRScrean())))
           // //   Navigator.push(
           // //     context!,
           // //     MaterialPageRoute<void>(
@@ -59,7 +59,7 @@ class BottomBarController with ChangeNotifier {
           // //     ),
           // //   );
           // // })),
-      onPressed: ((_) => Get.to(const MobileScanner()))),
+         ,
       PersistentBottomNavBarItem(
         textStyle: textStyle,
         icon: const Icon(Icons.local_grocery_store_outlined),

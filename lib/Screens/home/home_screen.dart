@@ -4,11 +4,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:images_picker/images_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:vender_machine/Model/machineModel.dart';
+// import 'package:vender_machine/Model/machineModel.dart';
 import 'package:vender_machine/Model/machineProduct.dart';
 import 'package:vender_machine/constants.dart';
 import 'package:vender_machine/providers/auth.dart';
 
+import '../../Model/model.dart';
 import '../../providers/product.dart';
 import '../../providers/products.dart';
 import '../../widgets/grocery_item_card_widget.dart';
@@ -18,98 +19,111 @@ import 'grocery_featured_Item_widget.dart';
 import 'home_banner_widget.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key, this.barcodeMachine});
-  String? barcodeMachine;
+  HomeScreen({super.key, this.products});
+  // String? barcodeMachine;
+  List<MachineProduct>? products;
 
   @override
   Widget build(BuildContext context) {
     final data = Provider.of<Products>(context);
-    final auth = Provider.of<Auth>(context);
+    // data.fetchAndSetProducts();
+    // MachineModel? machine;
+    // final auth = Provider.of<Auth>(context);
 
-    if (barcodeMachine != null) {}
+    // if (barcodeMachine != null) {
+    // machine = data.machines.firstWhereOrNull((element)=>
+    //    element.name == 'machine 2'
+    // );
+    // }
     Size size = MediaQuery.of(context).size;
     var height = SizedBox(
       height: size.height * 0.015,
     );
 
     return Scaffold(
-      body: barcodeMachine != null
-          ? SafeArea(
-              child: Container(
-                child: SingleChildScrollView(
-                  child: Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        height,
-                        // const SizedBox(
-                        //   height: 15,
-                        // ),
-                        // Image.asset("assets/images/login.png"),
+      body:
+          //  barcodeMachine != null
+          //     ?
+          data.machine != null
+              ? SafeArea(
+                  child: Container(
+                    child: SingleChildScrollView(
+                      child: Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            height,
+                            // const SizedBox(
+                            //   height: 15,
+                            // ),
+                            // Image.asset("assets/images/login.png"),
 
-                        padded(locationWidget()),
-                        height,
+                            padded(locationWidget()),
+                            height,
 
-                        padded(const SearchBarWidget()),
-                        height,
+                            padded(const SearchBarWidget()),
+                            height,
 
-                        padded(HomeBanner()), height,
+                            padded(HomeBanner()), height,
 
-                        padded(
-                          const Text(
-                            "الأصناف",
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: kPrimaryColor),
-                          ),
+                            padded(
+                              const Text(
+                                "الأصناف",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: kPrimaryColor),
+                              ),
+                            ),
+
+                            height,
+                            Container(
+                              height: 105,
+                              child: ListView(
+                                padding: EdgeInsets.zero,
+                                scrollDirection: Axis.horizontal,
+                                children: [
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  GroceryFeaturedCard(
+                                    groceryFeaturedItems[0],
+                                    color: const Color(0xffF8A44C),
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  GroceryFeaturedCard(
+                                    groceryFeaturedItems[1],
+                                    color: kPrimaryColor,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            // getHorizontalItemSlider(),
+                            data.machines.length != null
+                                ? getHorizontalItemSlider(
+                                    data.machine!.productsList!)
+                                : CircularProgressIndicator(),
+                            // getHorizontalItemSlider(machine!.productsList!),
+                          ],
                         ),
-
-                        height,
-                        Container(
-                          height: 105,
-                          child: ListView(
-                            padding: EdgeInsets.zero,
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              GroceryFeaturedCard(
-                                groceryFeaturedItems[0],
-                                color: const Color(0xffF8A44C),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              GroceryFeaturedCard(
-                                groceryFeaturedItems[1],
-                                color: kPrimaryColor,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        // getHorizontalItemSlider(),
-                        getHorizontalItemSlider(machines[0].productsList!),
-                        // getHorizontalItemSlider(machine!.productsList!),
-                      ],
+                      ),
                     ),
                   ),
+                )
+              : const Center(
+                  child: Text(
+                      'لا يوجد منتجات لعرضها .. امسح باركود الماكينة لعرض المنتجان'),
                 ),
-              ),
-            )
-          : const Center(
-              child: Text(
-                  'لا يوجد منتجات لعرضها .. امسح باركود الماكينة لعرض المنتجان'),
-            ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await auth.logOut();
-          // data.fetchAndSetProducts();
-        },
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () async {
+      //     // await auth.logOut();
+      //     data.fetchAndSetProducts();
+      //   },
         // onPressed: (() => products.addProduct(
         //       MachineModel(
         //         id: '1',
@@ -133,8 +147,8 @@ class HomeScreen extends StatelessWidget {
         //         ]
         //       ),
         //     )),
-        child: const Icon(Icons.add),
-      ),
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 
@@ -153,7 +167,8 @@ class HomeScreen extends StatelessWidget {
       height: 250,
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: items.length,
+        // itemCount: items.length,
+        itemCount: 3,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return GestureDetector(

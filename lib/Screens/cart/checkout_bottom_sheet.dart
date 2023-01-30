@@ -14,110 +14,6 @@ class CheckoutBottomSheet extends StatefulWidget {
 }
 
 class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 25,
-        vertical: 30,
-      ),
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-      child: Wrap(
-        children: <Widget>[
-          Row(
-            children: [
-              const AppText(
-                text: "الدفع",
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-              ),
-              const Spacer(),
-              GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Icon(
-                    Icons.close,
-                    size: 25,
-                  ))
-            ],
-          ),
-          const SizedBox(
-            height: 45,
-          ),
-          Form(
-              child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              cardInput(
-                  keyType: TextInputType.number,
-                  hintText: 'رقم البطاقة',
-                  icon: Icons.payment),
-              const SizedBox(
-                height: 20,
-              ),
-              cardInput(
-                  keyType: TextInputType.number,
-                  hintText: 'الاسم الرباعي',
-                  icon: Icons.person),
-              const SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 2.4,
-                      child: cardInput(
-                          keyType: TextInputType.number,
-                          hintText: 'MM/YY',
-                          icon: Icons.calendar_today),
-                    ),
-                    const SizedBox(width: 14),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 2.4,
-                      child: cardInput(
-                        keyType: TextInputType.number,
-                        hintText: 'CVV',
-                        icon: Icons.lock_outline,
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          )),
-          getDivider(),
-          checkoutRow("اجمالي الفاتورة ", trailingText: "\$13.97"),
-          getDivider(),
-          const SizedBox(
-            height: 30,
-          ),
-          termsAndConditionsAgreement(context),
-          Container(
-            margin: const EdgeInsets.only(
-              top: 20,
-            ),
-            child: AppButton(
-              label: "تأكيد الدفع",
-              fontWeight: FontWeight.w600,
-              // padding: const EdgeInsets.symmetric(
-              //   vertical: 25,
-              // ),
-              onPressed: () {
-                onPlaceOrderClicked();
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget getDivider() {
     return const Divider(
       thickness: 1,
@@ -135,7 +31,7 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
             fontFamily: Theme.of(context).textTheme.bodyText1!.fontFamily,
             fontWeight: FontWeight.w600,
           ),
-          children: const [
+          children:  [
             TextSpan(
                 text: " شروط",
                 style: TextStyle(
@@ -238,6 +134,110 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
             //         composing: TextRange.empty);
           });
         },
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 25,
+        vertical: 30,
+      ),
+      decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      child: Wrap(
+        children: <Widget>[
+          Row(
+            children: [
+              const AppText(
+                text: "الدفع",
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+              ),
+              const Spacer(),
+              GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Icon(
+                    Icons.close,
+                    size: 25,
+                  ))
+            ],
+          ),
+          const SizedBox(
+            height: 45,
+          ),
+          Form(
+              child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              cardInput(
+                  keyType: TextInputType.number,
+                  hintText: 'رقم البطاقة',
+                  icon: Icons.payment),
+              const SizedBox(
+                height: 20,
+              ),
+              cardInput(
+                  keyType: TextInputType.number,
+                  hintText: 'الاسم الرباعي',
+                  icon: Icons.person),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 2.4,
+                      child: cardInput(
+                          keyType: TextInputType.number,
+                          hintText: 'MM/YY',
+                          icon: Icons.calendar_today),
+                    ),
+                    const SizedBox(width: 14),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 2.4,
+                      child: cardInput(
+                        keyType: TextInputType.number,
+                        hintText: 'CVV',
+                        icon: Icons.lock_outline,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          )),
+          getDivider(),
+          checkoutRow("اجمالي الفاتورة ", trailingText: "\$13.97"),
+          getDivider(),
+          const SizedBox(
+            height: 30,
+          ),
+          termsAndConditionsAgreement(context),
+          Container(
+            margin: const EdgeInsets.only(
+              top: 20,
+            ),
+            child: AppButton(
+              label: "تأكيد الدفع",
+              fontWeight: FontWeight.w600,
+              // padding: const EdgeInsets.symmetric(
+              //   vertical: 25,
+              // ),
+              onPressed: () {
+                onPlaceOrderClicked();
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
