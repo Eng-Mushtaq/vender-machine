@@ -66,5 +66,6 @@ class QRScrean extends StatelessWidget {
             ],
           ),
         ]));
+        
   }
 }

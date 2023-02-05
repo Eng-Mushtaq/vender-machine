@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-List<Widget> getChildrenWithSeperator(
+List<Widget>  getChildrenWithSeperator(
     {List<Widget>? widgets, Widget? seperator, bool addToLastChild = true}) {
   List<Widget> children = [];
   if (widgets!.isNotEmpty) {

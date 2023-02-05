@@ -47,6 +47,7 @@ dependencies:
   firebase_auth: ^4.2.5
   google_sign_in: ^5.4.3
   mobile_scanner: ^2.1.0
+  get_storage: ^2.0.3
 
   
 
@@ -59,6 +60,8 @@ flutter_icons:
   android: true
   ios: true
   image_path: "assets/images/icon.png"
+  adaptive_icon_forground: "assets/images/icon_forground.png"
+  adaptive_icon_background: "#2a5a8a"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

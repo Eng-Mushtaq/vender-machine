@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:vender_machine/Screens/bottomNavBar.dart';
 import 'package:vender_machine/Screens/login/login.dart';
@@ -15,6 +16,7 @@ class Auth with ChangeNotifier {
   TextEditingController nameController = TextEditingController();
   bool? isLoading = false;
   String? message;
+  final storage = GetStorage();
 
   signIn(String email, password) async {
     try {
@@ -25,11 +27,13 @@ class Auth with ChangeNotifier {
         password: password,
       )
           .then((value) {
+        storage.write('email', email);
+        // storage.write('name', value.user!.displayName!);
         Get.to(ButtomNavBar());
         isLoading = false;
       });
     } on FirebaseAuthException catch (error) {
-      isLoading = true;
+      isLoading = false;
       String? title = error.code;
       String? message;
       if (error.code == 'week-password') {
@@ -59,6 +63,8 @@ class Auth with ChangeNotifier {
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email!, password: password!)
         .then((value) {
+      storage.write('email', email);
+      // storage.write('name', value.user!.displayName!);
       isLoading = false;
       Get.to(ButtomNavBar());
       emailController.text = '';
@@ -81,6 +87,8 @@ class Auth with ChangeNotifier {
     AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth!.accessToken, idToken: googleAuth.idToken);
     await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
+       storage.write('email', value.user!.email);
+        // storage.write('name', value.user!.displayName!);
       Get.to(ButtomNavBar());
       isLoading = false;
     }).catchError((onError) {
@@ -92,7 +100,7 @@ class Auth with ChangeNotifier {
 
   logOut() async {
     await FirebaseAuth.instance.signOut().then((value) {
-      Get.offAll(LoginScreen());
+      Get.offAll(() => LoginScreen());
     });
   }
 

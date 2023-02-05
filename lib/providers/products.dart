@@ -32,6 +32,7 @@ class Products with ChangeNotifier {
   List<MachineModel> machines = [];
   MachineModel? machine;
   List<MachineProduct> products = [];
+  List<MachineProduct> cartList = [];
 
   // void showFavoritesOnly() {
   //   _showFavoritesOnly = true;
@@ -77,40 +78,6 @@ class Products with ChangeNotifier {
     machine = machines.firstWhere((element) => element.qrCode == qrCode);
     notifyListeners();
   }
-
-  //   MachineModel get currentMachine {
-  //   return machines.firstWhere((prodItem) => prodItem.qrCode=="machine 2");
-  // }
-
-  // Future<void> addProduct(MachineModel machine) async {
-  //   const url =
-  //       'https://vender-machine-3ecd6-default-rtdb.firebaseio.com/machines.json';
-  //   // const url = 'https://flutter-update.firebaseio.com/products.json';
-  //   try {
-  //     final response = await http.post(
-  //       Uri.parse(url),
-  //       body: json.encode({
-  //         'name': machine.name,
-  //         'status': machine.status,
-  //         'qrCode': machine.qrCode,
-  //         'productsList': machine.productsList,
-  //       }),
-  //     );
-  //     // final newProduct = Product(
-  //     //   title: product.title,
-  //     //   description: product.description,
-  //     //   price: product.price,
-  //     //   imageUrl: product.imageUrl,
-  //     //   id: json.decode(response.body)['name'],
-  //     // );
-  //     // _items.add(newProduct);
-  //     // _items.insert(0, newProduct); // at the start of the list
-  //     notifyListeners();
-  //   } catch (error) {
-  //     print(error);
-  //     throw error;
-  //   }
-  // }
 
   Future<void> updateProduct(String id, Product newProduct) async {
     final prodIndex = _items.indexWhere((prod) => prod.id == id);

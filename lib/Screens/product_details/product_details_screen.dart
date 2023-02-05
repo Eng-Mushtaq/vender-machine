@@ -2,28 +2,36 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:vender_machine/Model/machineProduct.dart';
+import 'package:vender_machine/providers/cart.dart';
 
 import '../../common_widgets/app_button.dart';
 import '../../common_widgets/app_text.dart';
 import '../../widgets/item_counter_widget.dart';
 import 'favourite_toggle_icon_widget.dart';
 
-class ProductDetailsScreen extends StatefulWidget {
-  final MachineProduct? groceryItem;
-  final String? heroSuffix;
+// class ProductDetailsScreen extends StatefulWidget {
+//   final MachineProduct? groceryItem;
+//   final String? heroSuffix;
 
-  const ProductDetailsScreen(this.groceryItem, {super.key, this.heroSuffix});
+//   const ProductDetailsScreen(this.groceryItem, {super.key, this.heroSuffix});
 
-  @override
-  _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
-}
+//   @override
+//   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
+// }
 
-class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+class ProductDetailsScreen extends StatelessWidget {
+  ProductDetailsScreen({this.groceryItem});
+  MachineProduct? groceryItem;
+  String? heroSuffix;
+
   int? amount = 1;
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context);
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -37,12 +45,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       title: Text(
-                        widget.groceryItem!.name!,
+                        groceryItem!.name!,
                         style: const TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                       subtitle: AppText(
-                        text: widget.groceryItem !.description,
+                        text: groceryItem!.description,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: const Color(0xff7C7C7C),
@@ -52,19 +60,22 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     const Spacer(),
                     Row(
                       children: [
-                        ItemCounterWidget(
-                          onAmountChanged: (newAmount) {
-                            setState(() {
-                              amount = newAmount;
-                            });
-                          },
+                        AppText(
+                          text: 'سعر الوحدة ',
+                          fontWeight: FontWeight.bold,
                         ),
+                        // ItemCounterWidget(
+                        //   onAmountChanged: (newAmount) {
+                        //     // setState(() {
+                        //     //   amount = newAmount;
+                        //     // });
+                        //   },
+                        // ),
                         const Spacer(),
                         Text(
                           "\$${getTotalPrice().toStringAsFixed(2)}",
                           style: const TextStyle(
                             fontSize: 24,
-                            fontWeight: FontWeight.bold,
                           ),
                         )
                       ],
@@ -81,8 +92,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       customWidget: ratingWidget(),
                     ),
                     const Spacer(),
-                    const AppButton(
+                    AppButton(
                       label: "اضافة الى لطلبات",
+                      onPressed: () => cart.addItem(
+                        groceryItem!.id.toString(),
+                        groceryItem!.price!.toDouble(),
+                        groceryItem!.name!,
+                       groceryItem!.imagePath!,
+                      ),
                     ),
                     const Spacer(),
                   ],
@@ -117,10 +134,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             tileMode: TileMode.clamp),
       ),
       child: Hero(
-        tag:
-            "GroceryItem:${widget.groceryItem!.name}-${widget.heroSuffix ?? ""}",
+        tag: "GroceryItem:${groceryItem!.name}-${heroSuffix ?? ""}",
         child: Image(
-          image: NetworkImage(widget.groceryItem!.imagePath!),
+          image: NetworkImage(groceryItem!.imagePath!),
         ),
       ),
     );
@@ -188,6 +204,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 
   int getTotalPrice() {
-    return amount! * widget.groceryItem!.price!;
+    return amount! * groceryItem!.price!;
   }
 }

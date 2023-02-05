@@ -40,6 +40,7 @@ class GroceryItemCardWidget extends StatelessWidget {
               child: Center(
                 child: Hero(
                   tag: "GroceryItem:${item!.imagePath!}-${heroSuffix ?? ""}",
+                  // child: Container(),
                   child: imageWidget(item!.imagePath),
                 ),
               ),

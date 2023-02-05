@@ -1,17 +1,24 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
+import 'package:vender_machine/constants.dart';
+import 'package:vender_machine/widgets/snackBar.dart';
 
 class CartItem {
   final String? id;
+  final String? productId;
   final String? title;
-  final int? quantity;
+  int? quantity;
   final double? price;
+  final String? imageUrl;
 
-  CartItem({
-    @required this.id,
-    @required this.title,
-    @required this.quantity,
-    @required this.price,
-  });
+  CartItem(
+      {this.id,
+      this.title,
+      this.productId,
+      this.quantity,
+      this.price,
+      this.imageUrl,});
 }
 
 class Cart with ChangeNotifier {
@@ -37,35 +44,54 @@ class Cart with ChangeNotifier {
     String productId,
     double price,
     String title,
+    String? imageUrl,
   ) {
     if (_items.containsKey(productId)) {
       // change quantity...
       _items.update(
         productId,
         (existingCartItem) => CartItem(
-              id: existingCartItem.id,
-              title: existingCartItem.title,
-              price: existingCartItem.price,
-              quantity: existingCartItem.quantity! + 1,
-            ),
+          id: existingCartItem.id,
+          title: existingCartItem.title,
+          price: existingCartItem.price,
+          quantity: existingCartItem.quantity! + 1,
+          imageUrl: imageUrl,
+        ),
       );
+           snack('تم', 'تم زيادة طلبك بمقدار احد');
+      print('MMMMMMMMMMMMMMMMMMMM');
+      items.forEach((key, value) {
+        print(value.price);
+      });
+      print('MMMMMMMMMMMMMMMMMMMM');
     } else {
       _items.putIfAbsent(
         productId,
         () => CartItem(
-              id: DateTime.now().toString(),
-              title: title,
-              price: price,
-              quantity: 1,
-            ),
+          id: DateTime.now().toString(),
+          title: title,
+          price: price,
+          quantity: 1,
+          imageUrl: imageUrl
+        ),
       );
+      print('MMMMMMMMMMMMMMMMMMMM');
+      print(productId);
+      print('MMMMMMMMMMMMMMMMMMMM');
+      snack('نجاح', ' تم اضافة طلبك بنجااح');
+
     }
+
+
     notifyListeners();
   }
 
   void removeItem(String productId) {
     _items.remove(productId);
+    print(productId);
     notifyListeners();
+       snack('تم', 'تم حذف الطلب بنجاح');
+
   }
 
   void removeSingleItem(String productId) {
@@ -80,6 +106,7 @@ class Cart with ChangeNotifier {
                 title: existingCartItem.title,
                 price: existingCartItem.price,
                 quantity: existingCartItem.quantity! - 1,
+                imageUrl: existingCartItem.imageUrl,
               ));
     } else {
       _items.remove(productId);

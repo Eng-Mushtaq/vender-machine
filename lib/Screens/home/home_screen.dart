@@ -19,9 +19,9 @@ import 'grocery_featured_Item_widget.dart';
 import 'home_banner_widget.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key, this.products});
+  // HomeScreen({super.key, this.products});
   // String? barcodeMachine;
-  List<MachineProduct>? products;
+  // List<MachineProduct>? products;
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +42,11 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       body:
-          //  barcodeMachine != null
-          //     ?
+         
+    
           data.machine != null
-              ? SafeArea(
+              ? 
+              SafeArea(
                   child: Container(
                     child: SingleChildScrollView(
                       child: Center(
@@ -103,12 +104,12 @@ class HomeScreen extends StatelessWidget {
                             const SizedBox(
                               height: 15,
                             ),
-                            // getHorizontalItemSlider(),
+                           
                             data.machines.length != null
                                 ? getHorizontalItemSlider(
                                     data.machine!.productsList!)
                                 : CircularProgressIndicator(),
-                            // getHorizontalItemSlider(machine!.productsList!),
+                            // getHorizontalItemSlider(products),
                           ],
                         ),
                       ),
@@ -119,36 +120,7 @@ class HomeScreen extends StatelessWidget {
                   child: Text(
                       'لا يوجد منتجات لعرضها .. امسح باركود الماكينة لعرض المنتجان'),
                 ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () async {
-      //     // await auth.logOut();
-      //     data.fetchAndSetProducts();
-      //   },
-        // onPressed: (() => products.addProduct(
-        //       MachineModel(
-        //         id: '1',
-        //         name: 'machine 1',
-        //         status: 'active',
-        //         productsList: [
-        //           MachineProduct(
-        //             id: 1,
-        //             name: 'سنيكرز',
-        //             description: 'شوكولاتة فاخرة بمعايير ',
-        //             price: 3,
-        //             imagePath: 'assets/images/snickers.png',
-        //           ),
-        //           // MachineProduct(
-        //           //   id: 2,
-        //           //   name: 'جلاكسي',
-        //           //   description: 'شوكولاتة فاخرة بمعايير ',
-        //           //   price: 2,
-        //           //   imagePath: 'assets/images/galaxy.png',
-        //           // ),
-        //         ]
-        //       ),
-        //     )),
-      //   child: const Icon(Icons.add),
-      // ),
+     
     );
   }
 
@@ -167,14 +139,14 @@ class HomeScreen extends StatelessWidget {
       height: 250,
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        // itemCount: items.length,
-        itemCount: 3,
+        itemCount: items.length,
+        // itemCount: 3,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              Get.to(ProductDetailsScreen(
-                items[index],
+              Get.to(()=>ProductDetailsScreen(
+                groceryItem:items[index],
               ));
             },
             child: GroceryItemCardWidget(
