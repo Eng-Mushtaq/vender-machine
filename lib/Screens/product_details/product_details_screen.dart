@@ -31,15 +31,17 @@ class ProductDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
+    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             getImageHeaderWidget(),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: SizedBox(
+                height: size.height * 0.65,
                 child: Column(
                   children: [
                     ListTile(
@@ -98,7 +100,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         groceryItem!.id.toString(),
                         groceryItem!.price!.toDouble(),
                         groceryItem!.name!,
-                       groceryItem!.imagePath!,
+                        groceryItem!.imagePath!,
                       ),
                     ),
                     const Spacer(),
@@ -137,6 +139,7 @@ class ProductDetailsScreen extends StatelessWidget {
         tag: "GroceryItem:${groceryItem!.name}-${heroSuffix ?? ""}",
         child: Image(
           image: NetworkImage(groceryItem!.imagePath!),
+          // image: AssetImage(groceryItem!.imagePath!),
         ),
       ),
     );

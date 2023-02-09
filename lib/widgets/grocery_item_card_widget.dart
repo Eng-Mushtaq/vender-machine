@@ -84,6 +84,7 @@ class GroceryItemCardWidget extends StatelessWidget {
       child: imageUrl == null
           ? 
           const CircularProgressIndicator()
+          // :Image.asset(imageUrl)
           : Image.network(imageUrl),
     );
   }

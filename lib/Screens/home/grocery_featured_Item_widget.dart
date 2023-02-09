@@ -24,8 +24,9 @@ class GroceryFeaturedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
-      width: 250,
+      width: size.width * 0.5,
       height: 105,
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 17),
       decoration: BoxDecoration(
@@ -33,8 +34,10 @@ class GroceryFeaturedCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(18)),
       child: Row(
         children: [
-          Image(
-            image: AssetImage(groceryFeaturedItem.imagePath),
+          Expanded(
+            child: Image(
+              image: AssetImage(groceryFeaturedItem.imagePath),
+            ),
           ),
           const SizedBox(
             width: 15,

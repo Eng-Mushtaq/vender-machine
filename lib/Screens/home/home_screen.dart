@@ -41,86 +41,88 @@ class HomeScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      body:
-         
-    
-          data.machine != null
-              ? 
-              SafeArea(
-                  child: Container(
-                    child: SingleChildScrollView(
-                      child: Center(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            height,
-                            // const SizedBox(
-                            //   height: 15,
-                            // ),
-                            // Image.asset("assets/images/login.png"),
+      body: 
+      data.machine != null
+          ?
+           SafeArea(
+              child: Container(
+                child: SingleChildScrollView(
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        height,
+                        // const SizedBox(
+                        //   height: 15,
+                        // ),
+                        // Image.asset("assets/images/login.png"),
 
-                            padded(locationWidget()),
-                            height,
+                        padded(locationWidget()),
+                        Center(child: Text(data.machine!.name!)),
+                        height,
 
-                            padded(const SearchBarWidget()),
-                            height,
+                        padded(const SearchBarWidget()),
+                        height,
 
-                            padded(HomeBanner()), height,
+                        padded(HomeBanner()), height,
 
-                            padded(
-                              const Text(
-                                "الأصناف",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: kPrimaryColor),
-                              ),
-                            ),
-
-                            height,
-                            Container(
-                              height: 105,
-                              child: ListView(
-                                padding: EdgeInsets.zero,
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  GroceryFeaturedCard(
-                                    groceryFeaturedItems[0],
-                                    color: const Color(0xffF8A44C),
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  GroceryFeaturedCard(
-                                    groceryFeaturedItems[1],
-                                    color: kPrimaryColor,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                           
-                            data.machines.length != null
-                                ? getHorizontalItemSlider(
-                                    data.machine!.productsList!)
-                                : CircularProgressIndicator(),
-                            // getHorizontalItemSlider(products),
-                          ],
+                        padded(
+                          const Text(
+                            "الأصناف",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: kPrimaryColor),
+                          ),
                         ),
-                      ),
+
+                        height,
+                        Container(
+                          height: 105,
+                          child: ListView(
+                            padding: EdgeInsets.zero,
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              GroceryFeaturedCard(
+                                groceryFeaturedItems[0],
+                                color: const Color(0xffF8A44C),
+                              ),
+                              const SizedBox(
+                                width: 25,
+                              ),
+                              GroceryFeaturedCard(
+                                groceryFeaturedItems[1],
+                                color: kPrimaryColor,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+
+                        data.machines.length != null
+                            ?
+                             getHorizontalItemSlider(
+                                data.machine!.productsList!)
+                               
+                            : 
+                            CircularProgressIndicator(),
+
+                        // getHorizontalItemSlider(products),
+                      ],
                     ),
                   ),
-                )
-              : const Center(
-                  child: Text(
-                      'لا يوجد منتجات لعرضها .. امسح باركود الماكينة لعرض المنتجان'),
                 ),
-     
+              ),
+            )
+          : const Center(
+              child: Text(
+                  'لا يوجد منتجات لعرضها .. امسح باركود الماكينة لعرض المنتجان'),
+            ),
     );
   }
 
@@ -145,9 +147,9 @@ class HomeScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              Get.to(()=>ProductDetailsScreen(
-                groceryItem:items[index],
-              ));
+              Get.to(() => ProductDetailsScreen(
+                    groceryItem: items[index],
+                  ));
             },
             child: GroceryItemCardWidget(
               item: items[index],

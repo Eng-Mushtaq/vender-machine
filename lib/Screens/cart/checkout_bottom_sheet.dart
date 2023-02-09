@@ -31,7 +31,7 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
             fontFamily: Theme.of(context).textTheme.bodyText1!.fontFamily,
             fontWeight: FontWeight.w600,
           ),
-          children:  [
+          children: [
             TextSpan(
                 text: " شروط",
                 style: TextStyle(
@@ -191,6 +191,7 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
                 height: 20,
               ),
               SizedBox(
+                width: MediaQuery.of(context).size.width,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

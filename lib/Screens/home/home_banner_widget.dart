@@ -6,8 +6,9 @@ import '../../common_widgets/app_text.dart';
 class HomeBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
-      width: 500,
+      width: size.width,
       height: 115,
       padding: const EdgeInsets.only(left: 10),
       decoration: BoxDecoration(

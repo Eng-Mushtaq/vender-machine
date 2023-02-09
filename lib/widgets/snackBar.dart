@@ -8,7 +8,9 @@ SnackbarController snack(
   String? messageText,
 ) {
   return Get.showSnackbar(
+    
     GetSnackBar(
+      
       message: message,
       messageText: Text(
       messageText!,
@@ -18,6 +20,7 @@ SnackbarController snack(
       overlayColor: kBackgroundColor,
       borderColor: kPrimaryColor,
       duration: Duration(seconds: 2),
+      
     ),
   );
 }

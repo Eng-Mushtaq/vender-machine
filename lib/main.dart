@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         title: 'Vender Machine',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: kPrimaryColor,
+          primaryColor: kPrimaryColor,  
           textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
         ),
         home: SplashScreen(),

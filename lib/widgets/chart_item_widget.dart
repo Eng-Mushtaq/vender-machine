@@ -182,6 +182,7 @@ class ChartItemWidget extends StatelessWidget {
     return Container(
       width: 100,
       child: Image.network(imageUrl!),
+      // child: Image.asset(imageUrl!),
     );
   }
 

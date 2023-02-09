@@ -73,7 +73,7 @@ List<MachineModel> machines = [
       MachineProduct(
         id: 5,
         name: 'بيبسي',
-        description: 'مشروب غازي فاخر بمعايير ',
+        description: 'مشروب غازي فاخر بمعايير عالمية ',
         price: 20,
         imagePath: 'assets/images/pepsi.png',
       ),
