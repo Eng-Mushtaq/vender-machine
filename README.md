@@ -1,6 +1,6 @@
 # vender_machine
 
-A new Flutter project.
+Final project.
 
 ## Getting Started
 
